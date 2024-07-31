@@ -1,3 +1,12 @@
-"scripts": {
-  "start": "node app.js"
+{
+  "name": "cek-rekening",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "axios": "^0.21.1"
+  }
 }
