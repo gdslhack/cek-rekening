@@ -13,19 +13,15 @@ app.get('/cek-rekening', (req, res) => {
     // Handle different bank codes
     switch (bankCode) {
         case 'DANA':
-            // Add your logic for checking DANA rekening here
             res.send(`Memeriksa rekening DANA dengan nomor ${accountNumber}`);
             break;
         case 'OVO':
-            // Add your logic for checking OVO rekening here
             res.send(`Memeriksa rekening OVO dengan nomor ${accountNumber}`);
             break;
         case 'SHOPEEPAY':
-            // Add your logic for checking SHOPEEPAY rekening here
             res.send(`Memeriksa rekening SHOPEEPAY dengan nomor ${accountNumber}`);
             break;
         case 'LINKAJA':
-            // Add your logic for checking LINKAJA rekening here
             res.send(`Memeriksa rekening LINKAJA dengan nomor ${accountNumber}`);
             break;
         default:
