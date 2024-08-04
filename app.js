@@ -13,12 +13,9 @@ app.get('/cek-rekening', async (req, res) => {
 
     try {
         const response = await axios.get('https://api-rekening.lfourr.com/getEwalletAccount', {
-            params: {
-                bankCode,
-                accountNumber
-            }
+            params: { bankCode, accountNumber }
         });
-        res.json(response.data); // Send JSON response to the client
+        res.json(response.data);
     } catch (error) {
         console.error('Error fetching data from external API:', error);
         res.status(500).json({ error: 'Internal Server Error' });
