@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve static files (e.g., CSS, JS) from the 'public' directory
+// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Route to serve the form
