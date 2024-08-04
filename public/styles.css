@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #e5e5e5; /* Warna latar belakang mirip Telegram */
     color: #333;
     display: flex;
     justify-content: center;
@@ -11,15 +11,16 @@ body {
 
 .container {
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     background-color: #ffffff;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
 
 h1 {
-    color: #0078d4; /* Telegram Blue */
+    color: #0088cc; /* Warna biru Telegram */
+    text-align: center;
 }
 
 form {
@@ -35,25 +36,26 @@ label {
 input, select, button {
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 button {
-    background-color: #0078d4;
+    background-color: #0088cc;
     color: #ffffff;
     border: none;
     cursor: pointer;
+    font-size: 16px;
 }
 
 button:hover {
-    background-color: #005a9e;
+    background-color: #007ab8;
 }
 
 .response {
     margin-top: 20px;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 5px;
     background-color: #f9f9f9;
 }
