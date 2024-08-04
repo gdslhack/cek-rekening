@@ -2,9 +2,9 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-// Set up middleware to serve static files
+// Serve static files (e.g., HTML, CSS)
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Route to serve the form
@@ -15,24 +15,27 @@ app.get('/', (req, res) => {
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Cek Rekening</title>
+            <title>Form Cek Rekening</title>
         </head>
         <body>
             <h1>Form Cek Rekening</h1>
-            <form action="/cek-rekening" method="post">
-                <label for="nomorRekening">Nomor Rekening:</label>
-                <input type="text" id="nomorRekening" name="nomorRekening" required>
-                <button type="submit">Cek</button>
+            <form action="https://cek-rekening-gilt.vercel.app/cek-rekening" method="get" target="_blank">
+                <label for="accountNumber">Nomor HP:</label>
+                <input type="text" id="accountNumber" name="accountNumber" required><br><br>
+                
+                <label for="bankCode">Pilih Rekening:</label>
+                <select id="bankCode" name="bankCode" required>
+                    <option value="DANA">DANA</option>
+                    <option value="OVO">OVO</option>
+                    <option value="SHOPEEPAY">SHOPEEPAY</option>
+                    <option value="LINKAJA">LINKAJA</option>
+                </select><br><br>
+                
+                <button type="submit">Cek Rekening</button>
             </form>
         </body>
         </html>
     `);
-});
-
-// Route to handle form submission (example)
-app.post('/cek-rekening', (req, res) => {
-    // Handle form submission here
-    res.send('Form dikirim!');
 });
 
 // Start the server
