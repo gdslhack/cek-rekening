@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 document.getElementById('cekRekeningForm')?.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Prevent the form from submitting the traditional way
+    event.preventDefault();
 
     const accountNumber = (document.getElementById('accountNumber') as HTMLInputElement).value;
     const bankCode = (document.getElementById('bankCode') as HTMLSelectElement).value;
