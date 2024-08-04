@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
         </head>
         <body>
             <h1>Form Cek Rekening</h1>
-            <form action="https://cek-rekening-gilt.vercel.app/cek-rekening" method="get" target="_blank">
+            <form action="/cek-rekening" method="get" target="_blank">
                 <label for="accountNumber">Nomor HP:</label>
                 <input type="text" id="accountNumber" name="accountNumber" required><br><br>
                 
