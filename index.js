@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve static files (e.g., HTML, CSS)
+// Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Route to serve the form
@@ -16,10 +16,11 @@ app.get('/', (req, res) => {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Form Cek Rekening</title>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         </head>
         <body>
             <h1>Form Cek Rekening</h1>
-            <form action="/cek-rekening" method="get" target="_blank">
+            <form id="cekRekeningForm">
                 <label for="accountNumber">Nomor HP:</label>
                 <input type="text" id="accountNumber" name="accountNumber" required><br><br>
                 
@@ -33,6 +34,26 @@ app.get('/', (req, res) => {
                 
                 <button type="submit">Cek Rekening</button>
             </form>
+            <div id="responseContainer"></div>
+            <script>
+                document.getElementById('cekRekeningForm').addEventListener('submit', async (event) => {
+                    event.preventDefault(); // Prevent the form from submitting the traditional way
+
+                    const accountNumber = document.getElementById('accountNumber').value;
+                    const bankCode = document.getElementById('bankCode').value;
+
+                    try {
+                        const response = await axios.get('/cek-rekening', {
+                            params: { bankCode, accountNumber }
+                        });
+
+                        document.getElementById('responseContainer').innerText = JSON.stringify(response.data, null, 2);
+                    } catch (error) {
+                        console.error('Error fetching data:', error);
+                        document.getElementById('responseContainer').innerText = 'Error fetching data';
+                    }
+                });
+            </script>
         </body>
         </html>
     `);
