@@ -20,12 +20,8 @@
       "dest": "/app.js"
     },
     {
-      "src": "/styles.css",
-      "dest": "/public/styles.css"
-    },
-    {
-      "src": "/app.js",
-      "dest": "/public/app.js"
+      "src": "/public/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
