@@ -4,7 +4,7 @@ Modul ini menyediakan API untuk mengecek informasi rekening berdasarkan kode ban
 
 ## Endpoint
 
-**URL**: `[https://cek-rekening-gilt.vercel.app/cek-rekening](https://cek-rekening-olive.vercel.app/)`
+**URL**: `https://cek-rekening-olive.vercel.app/`
 
 **Method**: `GET`
 
@@ -31,19 +31,19 @@ Anda dapat menggunakan parameter berikut untuk memeriksa rekening dari berbagai 
 ## Contoh Permintaan
 
 ### Cek DANA
-[https://cek-rekening-gilt.vercel.app](https://cek-rekening-olive.vercel.app/)/cek-rekening?bankCode=DANA&accountNumber=089xxxxxx
+https://cek-rekening-olive.vercel.app/cek-rekening?bankCode=DANA&accountNumber=089xxxxxx
 
 ### Cek OVO
-[https://cek-rekening-gilt.vercel.app](https://cek-rekening-olive.vercel.app/)/cek-rekening?bankCode=OVO&accountNumber=089xxxxxx
+https://cek-rekening-olive.vercel.app/cek-rekening?bankCode=OVO&accountNumber=089xxxxxx
 
 ### Cek SHOPEE
 
-[https://cek-rekening-gilt.vercel.app](https://cek-rekening-olive.vercel.app/)/cek-rekening?bankCode=SHOPEEPAY&accountNumber=089xxxxxx
+https://cek-rekening-olive.vercel.app/cek-rekening?bankCode=SHOPEEPAY&accountNumber=089xxxxxx
 
 
 ### Cek LINKAJA
 
-[https://cek-rekening-gilt.vercel.app](https://cek-rekening-olive.vercel.app/)/cek-rekening?bankCode=LINKAJA&accountNumber=089xxxxxx
+https://cek-rekening-olive.vercel.app/cek-rekening?bankCode=LINKAJA&accountNumber=089xxxxxx
 
 
 ## Contoh Respons
