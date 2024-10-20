@@ -1,76 +1,46 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cek Rekening</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+document.getElementById('cekRekeningForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    // Ambil nilai dari input form
+    const accountNumber = document.getElementById('accountNumber').value.trim();
+    const bankCode = document.getElementById('bankCode').value.trim();
+
+    // Validasi input
+    if (!accountNumber || !bankCode) {
+        document.getElementById('responseContainer').innerHTML = 'Silakan masukkan Bank Code dan Account Number.';
+        return; // Hentikan eksekusi jika input tidak valid
+    }
+
+    try {
+        // Kirim permintaan ke endpoint API
+        const response = await fetch(`/cek-rekening?bankCode=${bankCode}&accountNumber=${accountNumber}`);
+        
+        // Periksa apakah respons berhasil
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-        #responseContainer {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            background-color: #f9f9f9;
-            white-space: pre-wrap; /* Menjaga whitespace di dalam teks */
-            max-height: 400px; /* Membatasi tinggi kontainer respons */
-            overflow-y: auto; /* Menambahkan scrollbar jika konten terlalu panjang */
+
+        // Ambil data JSON dari respons
+        const data = await response.json();
+
+        // Debugging: Log respons JSON ke console
+        console.log(data); // Tambahkan ini untuk melihat respons di console
+
+        // Periksa jika status true dan data tersedia
+        if (data.status && data.data) {
+            // Pastikan untuk mengakses data dengan benar
+            const resultHTML = `
+                <h2>Hasil Cek Rekening</h2>
+                <p><strong>Bank Code:</strong> ${data.data.bankcode || 'Tidak ada data'}</p>
+                <p><strong>Account Number:</strong> ${data.data.accountnumber || 'Tidak ada data'}</p>
+                <p><strong>Account Name:</strong> ${data.data.accountname || 'Tidak ada data'}</p>
+            `;
+            document.getElementById('responseContainer').innerHTML = resultHTML;
+        } else {
+            document.getElementById('responseContainer').innerHTML = 'Data tidak ditemukan';
         }
-    </style>
-</head>
-<body>
-    <h1>Cek Rekening</h1>
-    <form id="cekRekeningForm">
-        <label for="bankCode">Bank Code:</label>
-        <input type="text" id="bankCode" required>
-        <br>
-        <label for="accountNumber">Account Number:</label>
-        <input type="text" id="accountNumber" required>
-        <br>
-        <button type="submit">Cek Rekening</button>
-    </form>
-
-    <div id="responseContainer"></div> <!-- Tempat untuk menampilkan respons JSON -->
-
-    <script>
-        document.getElementById('cekRekeningForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            // Ambil nilai dari input form
-            const accountNumber = document.getElementById('accountNumber').value.trim();
-            const bankCode = document.getElementById('bankCode').value.trim();
-
-            // Validasi input
-            if (!accountNumber || !bankCode) {
-                document.getElementById('responseContainer').innerText = 'Silakan masukkan Bank Code dan Account Number.';
-                return; // Hentikan eksekusi jika input tidak valid
-            }
-
-            // Buat URL baru
-            const url = `https://cek-rekening-olive.vercel.app/cek-rekening?bankCode=${bankCode}&accountNumber=${accountNumber}`;
-
-            try {
-                // Kirim permintaan ke endpoint API
-                const response = await fetch(url);
-                
-                // Periksa apakah respons berhasil
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                // Ambil data JSON dari respons
-                const data = await response.json();
-
-                // Tampilkan respons JSON
-                document.getElementById('responseContainer').innerText = JSON.stringify(data, null, 2);
-                
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                document.getElementById('responseContainer').innerText = 'Error fetching data: ' + error.message;
-            }
-        });
-    </script>
-</body>
-</html>
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        document.getElementById('responseContainer').innerHTML = 'Error fetching data: ' + error.message;
+    }
+});
