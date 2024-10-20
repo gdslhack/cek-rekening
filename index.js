@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
         <body>
             <div class="container">
                 <h1>Cek Rekening</h1>
-                <form id="cekRekeningForm">
+                <form id="cekRekeningForm" action="/cek-rekening" method="GET">
                     <label for="accountNumber">Nomor HP:</label>
                     <input type="text" id="accountNumber" name="accountNumber" required><br><br>
                     
@@ -38,9 +38,7 @@ app.get('/', (req, res) => {
                     
                     <button type="submit">Cek Rekening</button>
                 </form>
-                <div id="responseContainer" class="response"></div>
             </div>
-            <script src="/app.js"></script>
         </body>
         </html>
     `);
@@ -52,7 +50,7 @@ app.get('/cek-rekening', async (req, res) => {
 
     // Validasi input
     if (!bankCode || !accountNumber) {
-        return res.status(400).json({ status: false, msg: 'Bank code atau nomor rekening tidak boleh kosong' });
+        return res.status(400).send(`<h2>Error</h2><p>Bank code atau nomor rekening tidak boleh kosong</p>`);
     }
 
     try {
@@ -68,11 +66,32 @@ app.get('/cek-rekening', async (req, res) => {
             }
         };
 
-        // Kirim respons JSON
-        res.json(simulatedResponse);
+        // Tampilkan respons sebagai HTML
+        res.send(`
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Hasil Cek Rekening</title>
+                <link rel="stylesheet" href="/styles.css">
+            </head>
+            <body>
+                <div class="container">
+                    <h1>Hasil Cek Rekening</h1>
+                    <p>Bank Code: ${simulatedResponse.data.bankcode}</p>
+                    <p>Account Number: ${simulatedResponse.data.accountnumber}</p>
+                    <p>Account Name: ${simulatedResponse.data.accountname}</p>
+                    <p>Status: ${simulatedResponse.status ? 'Sukses' : 'Gagal'}</p>
+                    <p>Pesan: ${simulatedResponse.msg}</p>
+                    <a href="/">Kembali</a>
+                </div>
+            </body>
+            </html>
+        `);
     } catch (error) {
         console.error('Error fetching account data:', error);
-        res.status(500).json({ status: false, msg: 'Terjadi kesalahan saat mengambil data rekening' });
+        res.status(500).send(`<h2>Error</h2><p>Terjadi kesalahan saat mengambil data rekening</p>`);
     }
 });
 
