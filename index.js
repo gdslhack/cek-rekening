@@ -7,6 +7,9 @@ const port = process.env.PORT || 3000;
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware to parse JSON data
+app.use(express.json());
+
 // Route to serve the form
 app.get('/', (req, res) => {
     res.send(`
@@ -41,6 +44,36 @@ app.get('/', (req, res) => {
         </body>
         </html>
     `);
+});
+
+// Endpoint to handle the account checking
+app.get('/cek-rekening', async (req, res) => {
+    const { bankCode, accountNumber } = req.query;
+
+    // Validasi input
+    if (!bankCode || !accountNumber) {
+        return res.status(400).json({ status: false, msg: 'Bank code atau nomor rekening tidak boleh kosong' });
+    }
+
+    try {
+        // Ganti dengan logika pengecekan rekening yang sesuai
+        // Simulasi respons dari API cek rekening
+        const simulatedResponse = {
+            status: true,
+            msg: "Berhasil ambil data dari cache",
+            data: {
+                bankcode: bankCode,
+                accountnumber: accountNumber,
+                accountname: "DANA Top Up DEDX SETXXXX PRAXXXXX" // Simulasi nama akun
+            }
+        };
+
+        // Kirim respons JSON
+        res.json(simulatedResponse);
+    } catch (error) {
+        console.error('Error fetching account data:', error);
+        res.status(500).json({ status: false, msg: 'Terjadi kesalahan saat mengambil data rekening' });
+    }
 });
 
 // Start the server
