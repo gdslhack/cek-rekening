@@ -2,30 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "index.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "app.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/",
-      "dest": "/index.js"
-    },
-    {
-      "src": "/cek-rekening",
+      "src": "/(.*)",
       "dest": "/app.js"
-    },
-    {
-      "src": "/styles.css",
-      "dest": "/public/styles.css"
-    },
-    {
-      "src": "/app.js",
-      "dest": "/public/app.js"
     }
   ]
 }
