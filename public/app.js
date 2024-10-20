@@ -8,13 +8,13 @@ document.getElementById('cekRekeningForm').addEventListener('submit', async (eve
         const response = await fetch(`/cek-rekening?bankCode=${bankCode}&accountNumber=${accountNumber}`);
         const data = await response.json();
 
-        // Periksa jika data.status true dan data.data ada
+        // Periksa jika status true dan data tersedia
         if (data.status && data.data) {
             const resultHTML = `
                 <h2>Hasil Cek Rekening</h2>
-                <p><strong>Bank Code:</strong> ${data.data.bankcode}</p>
-                <p><strong>Account Number:</strong> ${data.data.accountnumber}</p>
-                <p><strong>Account Name:</strong> ${data.data.accountname}</p>
+                <p><strong>Bank Code:</strong> ${data.data.bankcode || 'Tidak ada data'}</p>
+                <p><strong>Account Number:</strong> ${data.data.accountnumber || 'Tidak ada data'}</p>
+                <p><strong>Account Name:</strong> ${data.data.accountname || 'Tidak ada data'}</p>
             `;
             document.getElementById('responseContainer').innerHTML = resultHTML;
         } else {
