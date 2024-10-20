@@ -48,9 +48,12 @@
                 return; // Hentikan eksekusi jika input tidak valid
             }
 
+            // Buat URL baru
+            const url = `https://cek-rekening-olive.vercel.app/cek-rekening?bankCode=${bankCode}&accountNumber=${accountNumber}`;
+
             try {
                 // Kirim permintaan ke endpoint API
-                const response = await fetch(`/cek-rekening?bankCode=${bankCode}&accountNumber=${accountNumber}`);
+                const response = await fetch(url);
                 
                 // Periksa apakah respons berhasil
                 if (!response.ok) {
